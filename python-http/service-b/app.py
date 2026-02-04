@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import time
 import logging
 import requests
+from requests import exceptions as req_exceptions
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
 app = Flask(__name__)
@@ -22,6 +23,15 @@ def call_echo():
         data = r.json()
         logging.info(f'service=B endpoint=/call-echo status=ok latency_ms={int((time.time()-start)*1000)}')
         return jsonify(service_b="ok", service_a=data)
+    except req_exceptions.Timeout as e:
+        http_status = 504
+        logging.info("#### Failure contacting service A: timeout")
+        logging.info(f'service=B endpoint=/call-echo status=error http_status={http_status} error="timeout" complete_error="{str(e)}" latency_ms={int((time.time()-start)*1000)}')
+        return jsonify(service_b="ok", service_a="unavailable", error="timeout", http_status=http_status), 503
+    except req_exceptions.HTTPError as e:
+        http_status = e.response.status_code if e.response is not None else "unknown"
+        logging.info(f'service=B endpoint=/call-echo status=error http_status={http_status} error="{str(e)}" complete_error="{str(e)}" latency_ms={int((time.time()-start)*1000)}')
+        return jsonify(service_b="ok", service_a="unavailable", error=str(e), http_status=http_status), 503
     except Exception as e:
         logging.info(f'service=B endpoint=/call-echo status=error error="{str(e)}" latency_ms={int((time.time()-start)*1000)}')
         return jsonify(service_b="ok", service_a="unavailable", error=str(e)), 503
