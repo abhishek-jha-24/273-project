@@ -1,5 +1,8 @@
 # CMPE 273 – Week 1 Lab 1: Your First Distributed System
 
+for complete working screenshot outputs of this project: https://docs.google.com/document/d/1jbdrbmOSMctdEUUo8LsNZAp8tg3T7v-qK0MEJmtiodc/edit?usp=sharing
+
+
 This project implements a distributed system with two independent services that communicate over HTTP.
 
 ## Architecture
@@ -84,6 +87,7 @@ Expected response (HTTP 503):
 
 Check the terminal logs to see Service B's error logging:
 ```
+for complete working screenshot outputs of this project: https://docs.google.com/document/d/1jbdrbmOSMctdEUUo8LsNZAp8tg3T7v-qK0MEJmtiodc/edit?usp=sharing
 
 ```
 
