@@ -90,6 +90,10 @@ Expected response (HTTP 503):
 
 Check the terminal logs to see Service B's error logging:
 ```
+2026-02-04 14:41:10,320 #### Failure contacting service A: timeout
+2026-02-04 14:41:10,321 service=B endpoint=/call-echo status=error http_status=504 error="timeout" complete_error="ConnectTimeout('max retries exceeded...')" latency_ms=1005
+```
+```
 for complete working screenshot outputs of this project: https://docs.google.com/document/d/1jbdrbmOSMctdEUUo8LsNZAp8tg3T7v-qK0MEJmtiodc/edit?usp=sharing
 
 ```
