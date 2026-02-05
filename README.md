@@ -67,6 +67,9 @@ Expected response:
 ```bash
 curl "http://127.0.0.1:8080/health"
 ```
+```json
+{"status":"ok"}
+```
 
 **Test failure scenario:**
 1. Stop Service A (press Ctrl+C in Terminal 1)
